@@ -167,6 +167,8 @@ extern grub_err_t lzjb_decompress (void *, void *, grub_size_t, grub_size_t);
 
 extern grub_err_t lz4_decompress (void *, void *, grub_size_t, grub_size_t);
 
+extern grub_err_t zstd_decompress (void *, void *, grub_size_t, grub_size_t);
+
 typedef grub_err_t zfs_decomp_func_t (void *s_start, void *d_start,
 				      grub_size_t s_len, grub_size_t d_len);
 typedef struct decomp_entry
@@ -291,6 +293,7 @@ static const char *spa_feature_names[] = {
   "com.delphix:embedded_data",
   "com.delphix:extensible_dataset",
   "org.open-zfs:large_blocks",
+  "org.freebsd:zstd_compress",
   NULL
 };
 
@@ -362,6 +365,7 @@ static decomp_entry_t decomp_table[ZIO_COMPRESS_FUNCTIONS] = {
   {"gzip-9", zlib_decompress},  /* ZIO_COMPRESS_GZIP9 */
   {"zle", zle_decompress},      /* ZIO_COMPRESS_ZLE   */
   {"lz4", lz4_decompress},      /* ZIO_COMPRESS_LZ4   */
+  {"zstd", zstd_decompress},      /* ZIO_COMPRESS_LZ4   */
 };
 
 static grub_err_t zio_read_data (blkptr_t * bp, grub_zfs_endian_t endian,
@@ -3661,7 +3665,6 @@ zfs_mount (grub_device_t dev)
   grub_zfs_endian_t ub_endian = GRUB_ZFS_UNKNOWN_ENDIAN;
   uberblock_t *ub;
   int inserted;
-
   if (! dev->disk)
     {
       grub_error (GRUB_ERR_BAD_DEVICE, "not a disk");

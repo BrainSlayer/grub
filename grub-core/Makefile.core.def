@@ -1396,6 +1396,8 @@ module = {
   common = lib/zstd/xxhash.c;
   common = lib/zstd/zstd_common.c;
   common = lib/zstd/zstd_decompress.c;
+  common = lib/zstd/zstd_decompress_block.c;
+  common = lib/zstd/zstd_ddict.c;
   cflags = '$(CFLAGS_POSIX) -Wno-undef';
   cppflags = '-I$(srcdir)/lib/posix_wrap -I$(srcdir)/lib/zstd';
 };
@@ -1590,8 +1592,10 @@ module = {
   common = fs/zfs/zfs.c;
   common = fs/zfs/zfs_lzjb.c;
   common = fs/zfs/zfs_lz4.c;
+  common = fs/zfs/zfs_zstd.c;
   common = fs/zfs/zfs_sha256.c;
   common = fs/zfs/zfs_fletcher.c;
+  cppflags = '-I$(srcdir)/lib/zstd';
 };
 
 module = {

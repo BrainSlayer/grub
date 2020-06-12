@@ -132,6 +132,7 @@ library = {
   common = grub-core/fs/zfs/zfsinfo.c;
   common = grub-core/fs/zfs/zfs_lzjb.c;
   common = grub-core/fs/zfs/zfs_lz4.c;
+  common = grub-core/fs/zfs/zfs_zstd.c;
   common = grub-core/fs/zfs/zfs_sha256.c;
   common = grub-core/fs/zfs/zfs_fletcher.c;
   common = grub-core/lib/envblk.c;
@@ -177,6 +178,8 @@ library = {
   common = grub-core/lib/zstd/xxhash.c;
   common = grub-core/lib/zstd/zstd_common.c;
   common = grub-core/lib/zstd/zstd_decompress.c;
+  common = grub-core/lib/zstd/zstd_decompress_block.c;
+  common = grub-core/lib/zstd/zstd_ddict.c;
 };
 
 program = {
